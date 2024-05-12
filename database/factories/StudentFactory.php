@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'career' => fake()->randomElement(['Systems Engineering', 'Industrial Engineering', 'Medicine', 'Administration']),
+            'faculty' => fake()->randomElement(['Engineering and Architecture', 'Medicine']),
+            'people_id' => Person::all()->random()->id,
         ];
     }
 }
