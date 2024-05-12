@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('docents', function (Blueprint $table) {
             $table->id();
-            $table->enum('', ['Contract for work', 'Fixed-term employment contract', 'Indefinite-term employment contract', 
+            $table->enum('contract_type', ['Contract for work', 'Fixed-term employment contract', 'Indefinite-term employment contract', 
             'Apprenticeship contract', 'Temporary contract'])->nullable();
 
             $table->foreignId('people_id')

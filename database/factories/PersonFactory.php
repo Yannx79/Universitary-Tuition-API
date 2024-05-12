@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class PersonFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->name(),
+            'lastname' => fake()->lastName(),
+            'ruc' => fake()->unique()->numerify('##########'),
+            'user_id' => User::all()->random()->id
         ];
     }
 }

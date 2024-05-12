@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Person;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class DocentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'contract_type' => fake()->randomElement(['Contract for work', 'Fixed-term employment contract', 'Indefinite-term employment contract', 
+            'Apprenticeship contract', 'Temporary contract']),
+            'people_id' => Person::all()->random()->id
         ];
     }
 }

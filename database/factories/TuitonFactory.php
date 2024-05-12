@@ -17,7 +17,8 @@ class TuitonFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'grade' => fake()->text(30),
+            'tuiton_date' => fake()->date(),
         ];
     }
 }
