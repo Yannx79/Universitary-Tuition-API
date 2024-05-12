@@ -12,7 +12,12 @@ class PersonController extends Controller
      */
     public function index()
     {
-        //
+        $person = Person::paginate(10);
+        $data = [
+            'person' => $person,
+            'status' => 200,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -20,7 +25,19 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $person = Person::create($request->all());
+        if (!$person) {
+            $data = [
+                'message' => 'Person not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'person' => $person,
+            'status' => 201
+        ];
+        return response()->json($data, 201);
     }
 
     /**
@@ -28,7 +45,19 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        //
+        $person = Person::find($person->id);
+        if (!$person) {
+            $data = [
+                'message' => 'Person not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'person' => $person,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -36,7 +65,20 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $person = Person::find($person->id);
+        if (!$person) {
+            $data = [
+                'message' => 'Person not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $person->update($request->all());
+        $data = [
+            'person' => $person,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,6 +86,15 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
-        //
+        $person = Person::find($person->id);
+        if (!$person) {
+            $data = [
+                'message' => 'Person not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $person->delete();
+        return response()->json(null, 204);
     }
 }
