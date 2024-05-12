@@ -56,7 +56,7 @@ class DocentController extends Controller
         }
         $data = [
             'docent' => $docent,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
@@ -77,7 +77,7 @@ class DocentController extends Controller
         $docent->update($request->all());
         $data = [
             'docent' => $docent,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }

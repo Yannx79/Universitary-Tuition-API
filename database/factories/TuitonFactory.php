@@ -20,7 +20,8 @@ class TuitonFactory extends Factory
         return [
             'grade' => fake()->text(30),
             'tuiton_date' => fake()->date(),
-            'student_id' => fake()->unique()->randomElement(Student::all()),
+            'student_id' => null,
+            //'student_id' => fake()->randomElement(Student::all()->id),
         ];
     }
 }

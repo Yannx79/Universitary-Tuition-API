@@ -55,7 +55,7 @@ class StudentController extends Controller
         }
         $data = [
             'student' => $student,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
@@ -76,7 +76,7 @@ class StudentController extends Controller
         $student->update($request->all());
         $data = [
             'student' => $student,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }

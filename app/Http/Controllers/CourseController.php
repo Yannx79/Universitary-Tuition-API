@@ -55,7 +55,7 @@ class CourseController extends Controller
         }
         $data = [
             'course' => $course,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
@@ -76,7 +76,7 @@ class CourseController extends Controller
         $course->update($request->all());
         $data = [
             'course' => $course,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
