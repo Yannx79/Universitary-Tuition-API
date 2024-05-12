@@ -13,4 +13,12 @@ class CourseStudent extends Model
 
     protected $guarded = [];
 
+    public function course() {
+        return $this->belongsTo(course::class);
+    }
+
+    public function student() {
+        return $this->belongsTo(Student::class);
+    }
+
 }
