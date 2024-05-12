@@ -10,4 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Student extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
+
+    protected $guarded = [];
+
 }

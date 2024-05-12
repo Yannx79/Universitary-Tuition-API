@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class TuitonFactory extends Factory
         return [
             'grade' => fake()->text(30),
             'tuiton_date' => fake()->date(),
+            'student_id' => fake()->unique()->randomElement(Student::all()),
         ];
     }
 }

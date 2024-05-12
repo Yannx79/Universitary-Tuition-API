@@ -45,7 +45,7 @@ class TuitonController extends Controller
      */
     public function show(Tuiton $tuiton)
     {
-        $tuiton = Tuiton::find($tuiton);
+        $tuiton = Tuiton::find($tuiton->id);
         if (!$tuiton) {
             $data = [
                 'message' => 'Tuition not found!',
@@ -65,7 +65,7 @@ class TuitonController extends Controller
      */
     public function update(Request $request, Tuiton $tuiton)
     {
-        $tuiton = Tuiton::find($tuiton);
+        $tuiton = Tuiton::find($tuiton->id);
         if (!$tuiton) {
             $data = [
                 'message' => 'Tuition not found!',
@@ -86,7 +86,7 @@ class TuitonController extends Controller
      */
     public function destroy(Tuiton $tuiton)
     {
-        $tuiton = Tuiton::find($tuiton);
+        $tuiton = Tuiton::find($tuiton->id);
         if (!$tuiton) {
             $data = [
                 'message' => 'Tuition not found!',
