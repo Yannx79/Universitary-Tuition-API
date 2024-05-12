@@ -12,7 +12,12 @@ class TuitonController extends Controller
      */
     public function index()
     {
-        //
+        $tuiton = Tuiton::paginate(10);
+        $data = [
+            'tuiton' => $tuiton,
+            'status' => 200,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -20,7 +25,19 @@ class TuitonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tuiton = Tuiton::create($request->all());
+        if (!$tuiton) {
+            $data = [
+                'message' => 'Tuition not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'tuiton' => $tuiton,
+            'status' => 201
+        ];
+        return response()->json($data, 201);
     }
 
     /**
@@ -28,7 +45,19 @@ class TuitonController extends Controller
      */
     public function show(Tuiton $tuiton)
     {
-        //
+        $tuiton = Tuiton::find($tuiton);
+        if (!$tuiton) {
+            $data = [
+                'message' => 'Tuition not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'tuiton' => $tuiton,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -36,7 +65,20 @@ class TuitonController extends Controller
      */
     public function update(Request $request, Tuiton $tuiton)
     {
-        //
+        $tuiton = Tuiton::find($tuiton);
+        if (!$tuiton) {
+            $data = [
+                'message' => 'Tuition not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $tuiton->update($request->all());
+        $data = [
+            'tuiton' => $tuiton,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,6 +86,15 @@ class TuitonController extends Controller
      */
     public function destroy(Tuiton $tuiton)
     {
-        //
+        $tuiton = Tuiton::find($tuiton);
+        if (!$tuiton) {
+            $data = [
+                'message' => 'Tuition not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $tuiton->delete();
+        return response()->json(null, 204);
     }
 }

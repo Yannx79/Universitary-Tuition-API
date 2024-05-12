@@ -13,10 +13,10 @@ Route::get('/', function () {
 
 // Route::resource('courses', CourseController::class);
 // Route::resource('docents', DocentController::class);
-Route::resources([
+Route::apiResources([
     'courses' => CourseController::class,
     'docents' => DocentController::class,
 ]);
-Route::resource('persons', PersonController::class);
-Route::resource('students', StudentController::class);
-Route::resource('tuitons', TuitonController::class);
+Route::apiResource('persons', PersonController::class);
+Route::apiResource('students', StudentController::class);
+Route::apiResource('tuitons', TuitonController::class);
