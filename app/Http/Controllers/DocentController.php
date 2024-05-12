@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Docent;
 use Illuminate\Http\Request;
+use PhpParser\Comment\Doc;
 
 class DocentController extends Controller
 {
@@ -12,7 +13,12 @@ class DocentController extends Controller
      */
     public function index()
     {
-        //
+        $docent = Docent::paginate(10);
+        $data = [
+            'docent' => $docent,
+            'status' => 200,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -20,7 +26,19 @@ class DocentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $docent = Docent::create($request->all());
+        if (!$docent) {
+            $data = [
+                'message' => 'Docent not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'docent' => $docent,
+            'status' => 201
+        ];
+        return response()->json($data, 201);
     }
 
     /**
@@ -28,7 +46,19 @@ class DocentController extends Controller
      */
     public function show(Docent $docent)
     {
-        //
+        $docent = Docent::find($docent->id);
+        if (!$docent) {
+            $data = [
+                'message' => 'Docent not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'docent' => $docent,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -36,7 +66,20 @@ class DocentController extends Controller
      */
     public function update(Request $request, Docent $docent)
     {
-        //
+        $docent = Docent::find($docent->id);
+        if (!$docent) {
+            $data = [
+                'message' => 'Docent not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $docent->update($request->all());
+        $data = [
+            'docent' => $docent,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,6 +87,15 @@ class DocentController extends Controller
      */
     public function destroy(Docent $docent)
     {
-        //
+        $docent = Docent::find($docent->id);
+        if (!$docent) {
+            $data = [
+                'message' => 'Docent not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $docent->delete();
+        return response()->json(null, 204);
     }
 }

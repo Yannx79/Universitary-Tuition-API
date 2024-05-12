@@ -13,4 +13,12 @@ class Docent extends Model
 
     protected $guarded = [];
 
+    public function person() {
+        return $this->belongsTo(Person::class);
+    }
+
+    public function courses() {
+        return $this->hasMany(Course::class);
+    }
+
 }
