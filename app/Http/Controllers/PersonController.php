@@ -55,7 +55,7 @@ class PersonController extends Controller
         }
         $data = [
             'person' => $person,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
@@ -76,7 +76,7 @@ class PersonController extends Controller
         $person->update($request->all());
         $data = [
             'person' => $person,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }

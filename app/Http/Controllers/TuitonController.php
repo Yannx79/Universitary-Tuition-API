@@ -55,7 +55,7 @@ class TuitonController extends Controller
         }
         $data = [
             'tuiton' => $tuiton,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
@@ -76,7 +76,7 @@ class TuitonController extends Controller
         $tuiton->update($request->all());
         $data = [
             'tuiton' => $tuiton,
-            'status' => 404
+            'status' => 200
         ];
         return response()->json($data, 200);
     }

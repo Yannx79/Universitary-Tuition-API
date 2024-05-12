@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->enum('name', ['Math', 'Philosophy', 'Systemic', 'OOP']);
+            $table->enum('name', ['Math', 'Philosophy', 'Systemic', 'OOP'])->nullable();
 
             $table->foreignId('docent_id')
                 ->nullable()
