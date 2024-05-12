@@ -12,7 +12,12 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $course = Course::paginate(10);
+        $data = [
+            'course' => $course,
+            'status' => 200,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -20,7 +25,19 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $course = Course::create($request->all());
+        if (!$course) {
+            $data = [
+                'message' => 'Course not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'course' => $course,
+            'status' => 201
+        ];
+        return response()->json($data, 201);
     }
 
     /**
@@ -28,7 +45,19 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        //
+        $course = Course::find($course->id);
+        if (!$course) {
+            $data = [
+                'message' => 'Course not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'course' => $course,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -36,7 +65,20 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $course = Course::find($course->id);
+        if (!$course) {
+            $data = [
+                'message' => 'Course not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $course->update($request->all());
+        $data = [
+            'course' => $course,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,6 +86,15 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course = Course::find($course->id);
+        if (!$course) {
+            $data = [
+                'message' => 'Course not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $course->delete();
+        return response()->json(null, 204);
     }
 }

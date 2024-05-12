@@ -13,4 +13,16 @@ class Student extends Model
 
     protected $guarded = [];
 
+    public function tuiton() {
+        return $this->hasOne(Tuiton::class);
+    }
+
+    public function person() {
+        return $this->belongsTo(Person::class);
+    }
+
+    public function courses_students() {
+        return $this->hasMany(CourseStudent::class);
+    }
+
 }

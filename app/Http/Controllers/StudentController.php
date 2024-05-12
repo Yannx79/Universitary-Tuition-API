@@ -12,7 +12,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $student = Student::paginate(10);
+        $data = [
+            'student' => $student,
+            'status' => 200,
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -20,7 +25,19 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $student = Student::create($request->all());
+        if (!$student) {
+            $data = [
+                'message' => 'Student not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'student' => $student,
+            'status' => 201
+        ];
+        return response()->json($data, 201);
     }
 
     /**
@@ -28,7 +45,19 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        //
+        $student = Student::find($student->id);
+        if (!$student) {
+            $data = [
+                'message' => 'Tuition not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'student' => $student,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -36,7 +65,20 @@ class StudentController extends Controller
      */
     public function update(Request $request, Student $student)
     {
-        //
+        $student = Student::find($student->id);
+        if (!$student) {
+            $data = [
+                'message' => 'Student not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $student->update($request->all());
+        $data = [
+            'student' => $student,
+            'status' => 404
+        ];
+        return response()->json($data, 200);
     }
 
     /**
@@ -44,6 +86,15 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student = Student::find($student->id);
+        if (!$student) {
+            $data = [
+                'message' => 'Student not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $student->delete();
+        return response()->json(null, 204);
     }
 }
