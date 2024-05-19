@@ -40,7 +40,7 @@ class TuitonController extends Controller
         return response()->json($data, 201);
     }
 
-    /**
+    /**k
      * Display the specified resource.
      */
     public function show(Tuiton $tuiton)
