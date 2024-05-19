@@ -31,6 +31,9 @@ class DocentController extends Controller
             ];
             return response()->json($data, 404);
         }
+
+
+
         $data = [
             'courses' => $docent->courses,
             'status' => 200

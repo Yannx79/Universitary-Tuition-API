@@ -30,10 +30,17 @@ class StudentController extends Controller
             ];
             return response()->json($data, 404);
         }
+
+        $courses = [];
+        foreach ($student->courses_students as $coursesStudent) {
+            $course = $coursesStudent->course;
+            $courses[] = $course;
+        }
         $data = [
-            'courses' => $student->courses_students,
+            'courses' => $courses,
             'status' => 200
         ];
+
         return response()->json($data, 200);
     }
 
