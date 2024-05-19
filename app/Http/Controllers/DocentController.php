@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Docent;
 use Illuminate\Http\Request;
 use PhpParser\Comment\Doc;
@@ -17,6 +18,22 @@ class DocentController extends Controller
         $data = [
             'docent' => $docent,
             'status' => 200,
+        ];
+        return response()->json($data, 200);
+    }
+
+    public function getCourse(Docent $docent) {
+        $docent = Docent::find($docent->id);
+        if (!$docent) {
+            $data = [
+                'message' => 'Docent not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+        $data = [
+            'courses' => $docent->courses,
+            'status' => 200
         ];
         return response()->json($data, 200);
     }
