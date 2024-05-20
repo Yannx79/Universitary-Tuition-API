@@ -13,6 +13,8 @@ class Course extends Model
 
     protected $guarded = [];
 
+    protected $hidden = ['name'];
+
     public function docent() {
         return $this->belongsTo(Docent::class);
     }

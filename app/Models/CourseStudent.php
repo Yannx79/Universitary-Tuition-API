@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -19,6 +20,10 @@ class CourseStudent extends Model
 
     public function student() {
         return $this->belongsTo(Student::class);
+    }
+
+    public function scopeApproved(Builder $query): void {
+        $query->where('note', '>=', 10.5);
     }
 
 }
