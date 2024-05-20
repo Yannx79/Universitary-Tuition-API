@@ -24,8 +24,8 @@ class DatabaseSeeder extends Seeder
         Student::factory(20)->create();
         Tuiton::factory(20)->create();
         Docent::factory(20)->create();
-        Course::factory(20)->create();
-        CourseStudent::factory(50)->create();
+        Course::factory(100)->create();
+        CourseStudent::factory(100)->create();
 
         /*
         User::factory()->create([

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
+use App\Models\CourseStudent;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -20,7 +22,8 @@ class StudentController extends Controller
         return response()->json($data, 200);
     }
 
-    public function getCourses(Student $student) {
+    public function getCourses(Student $student)
+    {
         $student = Student::find($student->id);
 
         if (!$student) {
@@ -30,10 +33,49 @@ class StudentController extends Controller
             ];
             return response()->json($data, 404);
         }
+
+        $courses = [];
+        foreach ($student->courses_students as $coursesStudent) {
+            $course = $coursesStudent->course;
+            $courses[] = $course;
+        }
         $data = [
-            'courses' => $student->courses_students,
+            'courses' => $courses,
             'status' => 200
         ];
+
+        return response()->json($data, 200);
+    }
+
+    public function getCoursesApproved(Student $student)
+    {
+        $student = Student::find($student->id);
+
+        if (!$student) {
+            $data = [
+                'message' => 'Courses not found!',
+                'status' => 404
+            ];
+            return response()->json($data, 404);
+        }
+
+        $coursesStudents = CourseStudent::approved()->where('student_id', $student->id)->get();
+
+        $courses = [];
+        foreach ($coursesStudents as $coursesStudent) {
+            $course = $coursesStudent->course;
+            $courses[] = [
+                'id' => $course->id,
+                'name' => $course->name,
+                'note' => $coursesStudent->note
+            ];
+        }
+
+        $data = [
+            'courses' => $courses,
+            'status' => 200
+        ];
+
         return response()->json($data, 200);
     }
 

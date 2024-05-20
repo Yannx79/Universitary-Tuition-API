@@ -25,5 +25,6 @@ Route::get('docents/getCourses/{docent}', [DocentController::class, 'getCourse']
 // Students
 Route::apiResource('students', StudentController::class);
 Route::get('students/getCourses/{student}', [StudentController::class, 'getCourses'])->name('students.getCourse');
+Route::get('students/getCourses/{student}/Approved', [StudentController::class, 'getCoursesApproved'])->name('students.getCoursesApproved');
 
 Route::apiResource('tuitons', TuitonController::class);
