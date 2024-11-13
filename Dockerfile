@@ -58,7 +58,7 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_mysql zip gd
 
-RUN php artisan key:generate
+# RUN php artisan key:generate
 
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
