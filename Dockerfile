@@ -30,10 +30,10 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Copiar el archivo de configuración de producción (por ejemplo, .env.production)
-COPY .data.production .env
+COPY .data .env
 
 # Generar la clave de la aplicación
-RUN php artisan key:generate
+# RUN php artisan key:generate
 
 # Compilar assets (si usas Laravel Mix, TailwindCSS, etc.)
 RUN npm install && npm run prod
