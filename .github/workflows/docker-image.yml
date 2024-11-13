@@ -38,13 +38,13 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t yan640/recipes-api:$NEW_VERSION .
-        docker build -t yan640/recipes-api:latest .
+        docker build -t yan640/universitary-tuiton-api:$NEW_VERSION .
+        docker build -t yan640/universitary-tuiton-api:latest .
         
     - name: Push Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker push yan640/recipes-api:$NEW_VERSION
-        docker push yan640/recipes-api:latest
+        docker push yan640/universitary-tuiton-api:$NEW_VERSION
+        docker push yan640/universitary-tuiton-api:latest
       
