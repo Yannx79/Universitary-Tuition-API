@@ -30,7 +30,7 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Copiar el archivo de configuración de producción (por ejemplo, .env.production)
-COPY .env.production .env
+COPY .data.production .env
 
 # Generar la clave de la aplicación
 RUN php artisan key:generate
