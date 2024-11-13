@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Servicio PHP-FPM
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: laravel_app:latest
+    container_name: laravel_app
+    restart: unless-stopped
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      # - APP_KEY=base64:your-app-key
+      - DB_CONNECTION=sqlite
+    volumes:
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
+      - ./database/database.sqlite:/var/www/html/database/database.sqlite
+    depends_on:
+      - nginx
+    command: sh -c "php artisan migrate:fresh --seed && php-fpm"
+
+  # Servicio Nginx
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_server
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
