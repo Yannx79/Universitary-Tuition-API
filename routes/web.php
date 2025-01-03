@@ -4,6 +4,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DocentController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\TuitonController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,7 @@ Route::get('students/getCourses/{student}', [StudentController::class, 'getCours
 Route::get('students/getCourses/{student}/Approved', [StudentController::class, 'getCoursesApproved'])->name('students.getCoursesApproved');
 
 Route::apiResource('tuitons', TuitonController::class);
+
+// Filters
+Route::get('test', [TestController::class, 'index'])->name('test.index');
+Route::post('test/filters', [TestController::class, 'filters'])->name('test.filters');
